@@ -1,29 +1,37 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
-Philosophy Data Story
-Liang Hu
-01/23/2022
+
+Philosophy Data Story Liang Hu 01/23/2022
 
 ### when communism philospher meet capitalism phosophers
 
-### Question: 
+### Question:
 
-1. What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
+1.  What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
 
-2. What is the characteristic of Communism philosophers and capitalism philosophers ?
+2.  What is the characteristic of Communism philosophers and capitalism philosophers ?
 
-3. What are the possible topics that Communism philosophers and Capitalism philosophers will tend to talk about ?
+3.  What are the possible topics that Communism philosophers and Capitalism philosophers will tend to talk about ?
 
-### Introduction: 
+### Introduction:
 
-Communism and capitalism are two different economic and political ideologies that have had a significant impact on the development of modern society. Both ideologies have their roots in philosophy, and they have been the subject of much debate and discussion throughout history.
+Communism and capitalism are two different economic and political ideologies that have had a significant impact on the development of modern society.
+Both ideologies have their roots in philosophy, and they have been the subject of much debate and discussion throughout history.
 
-Communism, as a political and economic system, is based on the idea that all individuals should have equal access to the means of production, and that the state should control and own these means. This system is intended to eliminate class distinctions and create a society where everyone has equal opportunity and access to resources. The philosopher Karl Marx is considered the father of communism, and his ideas have been influential in the development of communist societies throughout the world.
+Communism, as a political and economic system, is based on the idea that all individuals should have equal access to the means of production, and that the state should control and own these means.
+This system is intended to eliminate class distinctions and create a society where everyone has equal opportunity and access to resources.
+The philosopher Karl Marx is considered the father of communism, and his ideas have been influential in the development of communist societies throughout the world.
 
-Capitalism, on the other hand, is an economic system in which private individuals and businesses own the means of production, and the economy is driven by the profit motive. The state plays a limited role in the economy, and individuals are free to own property, start businesses, and compete in the market. The philosopher Adam Smith is considered the father of capitalism, and his ideas about laissez-faire economics have been influential in the development of capitalist societies throughout the world.
-
+Capitalism, on the other hand, is an economic system in which private individuals and businesses own the means of production, and the economy is driven by the profit motive.
+The state plays a limited role in the economy, and individuals are free to own property, start businesses, and compete in the market.
+The philosopher Adam Smith is considered the father of capitalism, and his ideas about laissez-faire economics have been influential in the development of capitalist societies throughout the world.
 
 ```{r}
 library(magrittr) # needs to be run every time you start R and want to use %>%
@@ -43,14 +51,12 @@ library(RColorBrewer)
 d=read.csv("../data/philosophy_data.csv")
 ```
 
-
-
 ```{r}
 capitalism = subset(d, school == "capitalism")
 communism =subset(d, school=="communism")
 ```
-### Q1. What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
 
+### Q1. What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
 
 ```{r}
 tidy_communism <- communism %>% 
@@ -62,11 +68,12 @@ tidy_communism <- communism %>%
 #write.csv(tidy_communism, "../output/com_word_freq.csv", row.names=FALSE)
 tidy_communism
 ```
+
 ```{r}
 hist(tidy_communism$n)
 ```
- 1. What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
-  According to the word frequency, communism have unbelievable emphasize on labor.Communism is a political and economic ideology that emphasizes the collective ownership of the means of production and the elimination of social classes. This is often achieved through the centralization of labor power and the distribution of wealth and resources based on the principle of "from each according to their ability, to each according to their need." The goal of communism is to improve the living standards of ordinary workers and create a more equitable society.
+
+1.  What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ? According to the word frequency, communism have unbelievable emphasize on labor.Communism is a political and economic ideology that emphasizes the collective ownership of the means of production and the elimination of social classes. This is often achieved through the centralization of labor power and the distribution of wealth and resources based on the principle of "from each according to their ability, to each according to their need." The goal of communism is to improve the living standards of ordinary workers and create a more equitable society.
 
 ```{r}
 tidy_capitalism <- capitalism %>% 
@@ -84,11 +91,18 @@ tidy_capitalism
 hist(tidy_capitalism$n)
 
 ```
-  The most commonly used words in discussions about communism are "price", "money" and "labor" that focus on the ordinary workers.  The top 10 words chosen by people discussing capitalism may vary, but they are likely to focus on business-related concepts which is based on private ownership of the means of production and the creation of goods and services for profit
 
-  The following two work clouds can show different concerns that two ideologies. We can understand although there are two total different ideologies in the society. They still  have relative high similar words. The most common words for communism are labor and capital. On the other hand, capitalism philosophers tend to use the word like price and money which answer the first question. 
-  This may indicate that despite the fundamental differences, both ideologies share some common concerns, such as economy, society, and government. Additionally, it's also important to note that language used to discuss these ideologies may be similar, but the context and perspective can change the meaning of the words.
-  
+The most commonly used words in discussions about communism are "price", "money" and "labor" that focus on the ordinary workers.
+The top 10 words chosen by people discussing capitalism may vary, but they are likely to focus on business-related concepts which is based on private ownership of the means of production and the creation of goods and services for profit
+
+The following two work clouds can show different concerns that two ideologies.
+We can understand although there are two total different ideologies in the society.
+They still have relative high similar words.
+The most common words for communism are labor and capital.
+On the other hand, capitalism philosophers tend to use the word like price and money which answer the first question.
+This may indicate that despite the fundamental differences, both ideologies share some common concerns, such as economy, society, and government.
+Additionally, it's also important to note that language used to discuss these ideologies may be similar, but the context and perspective can change the meaning of the words.
+
 ```{r}
 wordcloud(words =tidy_communism$word, freq=tidy_communism$n, max.words =100, 
           colors=brewer.pal(8, "Dark2"))
@@ -98,8 +112,6 @@ wordcloud(words =tidy_capitalism$word, freq=tidy_capitalism$n, max.words =100,
 
 ```
 
-
-
 ```{r}
   all_capitalism <- capitalism %>% 
   unnest_tokens(word, sentence_str) %>%
@@ -108,7 +120,6 @@ wordcloud(words =tidy_capitalism$word, freq=tidy_capitalism$n, max.words =100,
   arrange(desc(n))
 ```
 
-
 ```{r}
   all_communism <- communism %>% 
   unnest_tokens(word, sentence_str) %>%
@@ -116,11 +127,12 @@ wordcloud(words =tidy_capitalism$word, freq=tidy_capitalism$n, max.words =100,
   count(word)%>% 
   arrange(desc(n))
 ```
-### 2. What is the characteristic of Communism philosophers and capitalism philosophers ?
+
+### Q2. What is the characteristic of Communism philosophers and capitalism philosophers ?
+
 ```{r}
 library("textdata")
 ```
-
 
 ```{R}
   sentiments_capitalism= all_capitalism %>%
@@ -163,6 +175,7 @@ sentiments_capitalism %>%
   facet_wrap(~ sentiment, scales = "free") +
   coord_flip()
 ```
+
 ```{r}
 col.use=c("darkgoldenrod1", "darkgoldenrod2", "darkgoldenrod3", "darkgoldenrod4",
             "red2", "chartreuse3", "blueviolet","dodgerblue3")
@@ -175,7 +188,6 @@ sentiments_capitalism %>%
   # Arrange the sentiment counts in descending order
   arrange(desc(n))
 ```
-
 
 ```{R}
   sentiments_communism= all_communism %>%
@@ -203,6 +215,7 @@ sentiments_communism %>%
   geom_bar(stat="identity") + 
   coord_flip()
 ```
+
 ```{r}
 sentiments_communism %>%
   group_by(sentiment) %>%
@@ -216,7 +229,6 @@ sentiments_communism %>%
   facet_wrap(~ sentiment, scales = "free") +
   coord_flip()
 ```
-
 
 ```{r}
 col.use=c("darkgoldenrod1", "darkgoldenrod2", "darkgoldenrod3", "darkgoldenrod4",
@@ -224,7 +236,6 @@ col.use=c("darkgoldenrod1", "darkgoldenrod2", "darkgoldenrod3", "darkgoldenrod4"
 barplot(new1$n, las=2, horiz=T, col=col.use[order(new1$n)], names.arg=new1$sentiment, main="communism philosophers")
 ```
 
-
 ```{r}
 sentiments_communism %>%
   group_by(sentiment) %>%
@@ -239,13 +250,16 @@ sentiments_communism %>%
   coord_flip()
 ```
 
-  According to the emotion assessment, capitalism philosophers in general have less  surprise, less trust, less disgust in their sentences. The similarity are their opinion towards happy and sadness. 
-  The mainly differences are the perspective of disgust. Communism philosophers have anger on slavery and death. In comparison, capitalism philosophers tend to have anger on abundance or prohibited the words that shows low profit. Also, capitalism  philosopher have less trust and less surprise toward the public. These characteristic reflect their personalities are more calm and peace. 
-
-
-
+According to the emotion assessment, capitalism philosophers in general have less surprise, less trust, less disgust in their sentences.
+The similarity are their opinion towards happy and sadness.
+The mainly differences are the perspective of disgust.
+Communism philosophers have anger on slavery and death.
+In comparison, capitalism philosophers tend to have anger on abundance or prohibited the words that shows low profit.
+Also, capitalism philosopher have less trust and less surprise toward the public.
+These characteristic reflect their personalities are more calm and peace.
 
 ### Q3. What are the possible topics that Communism philosophers and Capitalism philosophers will tend to talk about ?
+
 ```{r}
 library("reshape2")
 ```
@@ -264,6 +278,7 @@ dtm_communism = tidy_communism %>%
   # Cast the word counts into a DTM
   cast_dtm(author, word, n)
 ```
+
 ```{r}
   tidy_capitalism <- capitalism %>% 
   unnest_tokens(word, sentence_str) %>%
@@ -273,7 +288,6 @@ dtm_capitalism = tidy_capitalism%>%
   # Cast the word counts into a DTM
   cast_dtm(author, word, n)
 ```
-
 
 ```{r}
 burnin <- 4000
@@ -295,6 +309,7 @@ ldaOut.topics <- as.matrix(topics(ldaOut))
 table(c(1:k, ldaOut.topics))
 ldaOut.topics
 ```
+
 ```{r}
 terms.beta=ldaOut@beta
 terms.beta=scale(terms.beta)
@@ -304,8 +319,8 @@ for(i in 1:k){
 }
 topics.terms
 ```
-![ ](../figs/smith.png)
 
+![](../figs/smith.png)
 
 ```{r}
 burnin <- 4000
@@ -337,30 +352,27 @@ for(i in 1:k){
 }
 topics.terms
 ```
-![ ](../figs/marx.png)
 
-According to the LDA analysis that learn in the class, the representation of Communism philosopher Marx will tend to say about why the workers don't have enough payment all the time. Some 
-The representation of  Capitalism philosophers, Smith will argue that we need to build the country. There are overwhelming demanding that the labor need to do. Also, He believed that the labor market, when left to its own devices, will adjust itself to balance supply and demand. 
+![](../figs/marx.png)
 
-### Question: 
+According to the LDA analysis that learn in the class, the representation of Communism philosopher Marx will tend to say about why the workers don't have enough payment all the time.
+Some The representation of Capitalism philosophers, Smith will argue that we need to build the country.
+There are overwhelming demanding that the labor need to do.
+Also, He believed that the labor market, when left to its own devices, will adjust itself to balance supply and demand.
 
-1. What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
+### Question:
 
-2. What is the characteristic of Communism philosophers and capitalism philosophers ?
+1.  What is the most frequency word the communism philosopher and capitalism philosophers use in sentences ?
 
-3. What are the possible topics that Communism philosophers and Capitalism philosophers will tend to talk about ?
+2.  What is the characteristic of Communism philosophers and capitalism philosophers ?
 
+3.  What are the possible topics that Communism philosophers and Capitalism philosophers will tend to talk about ?
 
 ### Conclusions
 
+1.  The most common used words for communism philosopher are "labor", "capital", and production.  Also, the most frequency words that capitalism philosopher used are "price", "money", and "labor"
 
-1. The most commonly used words in discussions about communism are "price", "money" and "labor" that focus on the ordinary workers.  The top 10 words chosen by people discussing capitalism may vary, but they are likely to focus on business-related concepts which is based on private ownership of the means of production and the creation of goods and services for profit. 
-  
-According to work clouds analysis, it can show different concerns that two ideologies. We can understand although there are two total different ideologies in the society. They still  have relative high similar words. The most common words for communism are labor and capital. On the other hand, capitalism philosophers tend to use the word like price and money which answer the first question. 
-  This may indicate that despite the fundamental differences, both ideologies share some common concerns, such as economy, society, and government. Additionally, it's also important to note that language used to discuss these ideologies may be similar, but the context and perspective can change the meaning of the words.
-  
-
-2. The characteristic of capitalism philosophers in general have less  surprise, less trust, less disgust in their sentences. The similarity are their opinion towards happy and sadness. The mainly differences are the perspective of disgust. Communism philosophers have anger on slavery and death. In comparison, capitalism philosophers tend to have anger on abundance or prohibited the words that shows low profit. Also, capitalism  philosopher have less trust and less surprise toward the public. These characteristic reflect their personalities are more calm and peace. 
-
-
-3. According to the LDA analysis that learn in the class, the representation of Communism philosopher Marx will tend to say about why the workers don't have enough payment all the time. The representation of  Capitalism philosophers, Smith will argue that we need to build the country. There are overwhelming demanding that the labor need to do. Also, He believed that the labor market, when left to its own devices, will adjust itself to balance supply and demand. 
+2.  The characteristic of capitalism philosophers are innovative, leading to greater efficiency, and calm.
+    In comparison, communism philosophers tend to have anger on abundance or prohibited the words that shows low profit.
+ 
+3.   Marx may asked Smith to focus on labor life quality. Then,  Smith will argue that efficiency on production and principle of a free market is the core topic. They may argue about society and the public in the following topics.
