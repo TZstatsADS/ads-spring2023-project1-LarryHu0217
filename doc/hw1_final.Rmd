@@ -1,12 +1,10 @@
 ---
 title: "R Notebook"
-output:
-  html_document:
-    df_print: paged
+output: html_notebook
 ---
 
-
-Philosophy Data Story Liang Hu 01/23/2022
+Philosophy Data Story
+Liang Hu 01/23/2022
 
 ### when communism philosophers meet capitalism philosophers
 
@@ -298,10 +296,7 @@ topics.terms
 
 ```{r}
 k <- 5
-#Run LDA using Gibbs sampling
 ldaOut <-LDA(dtm_communism, k, method="Gibbs")
-#write out results
-#docs to topics
 ldaOut.topics <- as.matrix(topics(ldaOut))
 table(c(1:k, ldaOut.topics))
 ldaOut.topics
@@ -325,7 +320,7 @@ topics.terms
   According to the LDA analysis that learn in the class, the representation of Communism philosopher Marx will tend to say about why the workers don't have enough payment all the time. The workers are always hungry and poor.
 Then, the representation of Capitalism philosophers, Smith will argue that we need to build the country.
 There are overwhelming demanding that the labor need to do.
-Also, He believed that the labor market, when left to its own devices, will adjust itself to balance supply and demand.
+  Also, he believed that the labor market, when left to its own devices, will adjust itself to balance supply and demand.
 
 ### Question:
 
