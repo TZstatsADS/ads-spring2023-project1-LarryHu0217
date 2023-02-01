@@ -10,7 +10,7 @@ editor_options:
 
 Philosophy Data Story Liang Hu 01/23/2022
 
-### when communism philospher meet capitalism phosophers
+### when communism philosophers meet capitalism philosophers
 
 ### Question:
 
@@ -370,9 +370,12 @@ Also, He believed that the labor market, when left to its own devices, will adju
 
 ### Conclusions
 
-1.  The most common used words for communism philosopher are "labor", "capital", and production.  Also, the most frequency words that capitalism philosopher used are "price", "money", and "labor"
+1.  The most common used words for communism philosopher are "labor", "capital", and production.
+    Also, the most frequency words that capitalism philosopher used are "price", "money", and "labor"
 
 2.  The characteristic of capitalism philosophers are innovative, leading to greater efficiency, and calm.
     In comparison, communism philosophers tend to have anger on abundance or prohibited the words that shows low profit.
- 
-3.   Marx may asked Smith to focus on labor life quality. Then,  Smith will argue that efficiency on production and principle of a free market is the core topic. They may argue about society and the public in the following topics.
+
+3.  Marx may asked Smith to focus on labor life quality.
+    Then, Smith will argue that efficiency on production and principle of a free market is the core topic.
+    They may argue about society and the public in the following topics.
